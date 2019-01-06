@@ -29,32 +29,34 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->name,
+        'brandLabel' => 'Fairox Services',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
+
+
+        $menuItems = [
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
-            )
-        ],
-    ]);
+        ];
+            if(Yii::$app->user->isGuest) {
+                $menuItems[] = ['label' => 'Login1', 'url' => ['/site/login-one']];
+                $menuItems[] = ['label' => 'Login2', 'url' => ['/site/login-two']];
+                $menuItems[] = ['label' => 'Signup1', 'url' => ['/site/signup-one']];
+                $menuItems[] = ['label' => 'Signup2', 'url' => ['/site/signup-two']];
+            }else{
+                $menuItems[] = [
+                  'label' => 'Logout (' . Yii::$app->user->identity->username .')',
+                    'url' => ['/site/logout'],
+                    'linkOptions' => ['data-method' => 'post']
+                ];
+            }
+        echo Nav::widget([
+            'options' => ['class' => 'navbar-nav navbar-right'],
+            'items' => $menuItems,
+        ]);
     NavBar::end();
     ?>
 
@@ -69,10 +71,8 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
-    </div>
+        <p class="pull-left">&copy; Fairox Services <?= date('Y') ?></p>
+</div>
 </footer>
 
 <?php $this->endBody() ?>

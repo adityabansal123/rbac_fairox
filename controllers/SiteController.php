@@ -7,8 +7,12 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
+use app\models\LoginoneForm;
+use app\models\LogintwoForm;
+use app\models\SignuponeForm;
+use app\models\SignuptwoForm;
+use yii\base\InvalidParamException;
+use yii\web\BadRequestHttpException;
 
 class SiteController extends Controller
 {
@@ -65,29 +69,29 @@ class SiteController extends Controller
     }
 
     /**
-     * Login action.
+     * LoginOne action.
      *
      * @return Response|string
      */
-    public function actionLogin()
+    public function actionLoginOne()
     {
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
 
-        $model = new LoginForm();
+        $model = new LoginoneForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         }
 
         $model->password = '';
-        return $this->render('login', [
+        return $this->render('loginone', [
             'model' => $model,
         ]);
     }
 
     /**
-     * Logout action.
+     * LogoutOne action.
      *
      * @return Response
      */
@@ -99,23 +103,54 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays contact page.
+     * LoginTwo action.
      *
      * @return Response|string
      */
-    public function actionContact()
+    public function actionLoginTwo()
     {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            return $this->refresh();
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
         }
-        return $this->render('contact', [
+
+        $model = new LogintwoForm();
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            return $this->goBack();
+        }
+
+        $model->password = '';
+        return $this->render('logintwo', [
             'model' => $model,
         ]);
     }
 
+    public function actionSignupOne() {
+        $model = new SignuponeForm();
+        if ($model->load(Yii::$app->request->post())) {
+            if ($user = $model->signup()) {
+                if (Yii::$app->getUser()->login($user)) {
+                    return $this->goHome();
+                }
+            }
+        }
+        return $this->render('signupone', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionSignupTwo() {
+        $model = new SignuptwoForm();
+        if ($model->load(Yii::$app->request->post())) {
+            if ($user = $model->signup()) {
+                if (Yii::$app->getUser()->login($user)) {
+                    return $this->goHome();
+                }
+            }
+        }
+        return $this->render('signuptwo', [
+            'model' => $model,
+        ]);
+    }
     /**
      * Displays about page.
      *
