@@ -30,27 +30,21 @@ class SiteController extends Controller
                         'actions' => ['logout'],
                         'allow' => true,
                         'roles' => ['@'],
-                        'denyCallback' => function ($rule, $action) {
-                            throw new \Exception('You are not allowed to access this page');
-                        }
                     ],
                     [
                         'actions' => ['demo-one'],
                         'allow' => true,
                         'roles' => ['classone'],
-                        'denyCallback' => function ($rule, $action) {
-                            throw new \Exception('You are not allowed to access this page');
-                        }
                     ],
                     [
                         'actions' => ['demo-two'],
                         'allow' => true,
                         'roles' => ['classtwo'],
-                        'denyCallback' => function ($rule, $action) {
-                            throw new \Exception('You are not allowed to access this page');
-                        }
                     ],
                 ],
+                'denyCallback' => function ($rule, $action) {
+                    throw new \Exception('You are not allowed to access this page');
+                }
             ],
             'verbs' => [
                 'class' => VerbFilter::className(),
