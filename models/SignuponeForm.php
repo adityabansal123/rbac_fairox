@@ -43,9 +43,13 @@ class SignuponeForm extends Model
             $user->email = $this->email;
             $user->setPassword($this->password);
             $user->generateAuthKey();
-            if ($user->save()) {
-                return $user;
-            }
+            $user->save();
+
+            $auth = Yii::$app->authManager;
+            $classoneRole = $auth->getRole('classone');
+            $auth->assign($classoneRole, $user->getId());
+            return $user;
+
         }
         return null;
     }

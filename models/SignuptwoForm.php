@@ -43,9 +43,13 @@ class SignuptwoForm extends Model
             $user->email = $this->email;
             $user->setPassword($this->password);
             $user->generateAuthKey();
-            if ($user->save()) {
-                return $user;
-            }
+            $user->save();
+
+            $auth = Yii::$app->authManager;
+            $classtwoRole = $auth->getRole('classtwo');
+            $auth->assign($classtwoRole, $user->getId());
+            return $user;
+
         }
         return null;
     }

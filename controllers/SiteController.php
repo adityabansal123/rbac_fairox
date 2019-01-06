@@ -24,12 +24,22 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout'],
+                'only' => ['logout', 'demo-one', 'demo-two'],
                 'rules' => [
                     [
                         'actions' => ['logout'],
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ['classoneRole'],
+                    ],
+                    [
+                        'actions' => ['demo-one'],
+                        'allow' => true,
+                        'roles' => [''],
+                    ],
+                    [
+                        'actions' => ['demo-two'],
+                        'allow' => true,
+                        'roles' => ['classtwoRole'],
                     ],
                 ],
             ],
@@ -56,6 +66,13 @@ class SiteController extends Controller
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
+    }
+
+    public function actionDemoOne(){
+        return 1;
+    }
+    public function actionDemoTwo(){
+        return 2;
     }
 
     /**
