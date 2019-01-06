@@ -16,6 +16,9 @@ $config = [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'z1S2bKIu8RsiYrYdwzZFBK3iolk-dE_C',
         ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+        ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
