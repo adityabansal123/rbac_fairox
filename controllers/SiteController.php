@@ -31,7 +31,7 @@ class SiteController extends Controller
                         'allow' => true,
                         'roles' => ['@'],
                         'denyCallback' => function ($rule, $action) {
-                            return $this->redirect('/site/index');
+                            throw new \Exception('You are not allowed to access this page');
                         }
                     ],
                     [
@@ -39,7 +39,7 @@ class SiteController extends Controller
                         'allow' => true,
                         'roles' => ['classone'],
                         'denyCallback' => function ($rule, $action) {
-                            return $this->redirect('/site/login-one');
+                            throw new \Exception('You are not allowed to access this page');
                         }
                     ],
                     [
@@ -47,7 +47,7 @@ class SiteController extends Controller
                         'allow' => true,
                         'roles' => ['classtwo'],
                         'denyCallback' => function ($rule, $action) {
-                            return $this->redirect('/site/login-two');
+                            throw new \Exception('You are not allowed to access this page');
                         }
                     ],
                 ],
