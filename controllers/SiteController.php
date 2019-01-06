@@ -34,12 +34,12 @@ class SiteController extends Controller
                     [
                         'actions' => ['demo-one'],
                         'allow' => true,
-                        'roles' => ['classoneRole'],
+                        'roles' => ['classone'],
                     ],
                     [
                         'actions' => ['demo-two'],
                         'allow' => true,
-                        'roles' => ['classtwoRole'],
+                        'roles' => ['classtwo'],
                     ],
                 ],
             ],
