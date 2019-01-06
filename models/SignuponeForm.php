@@ -38,7 +38,7 @@ class SignuponeForm extends Model
     public function signup()
     {
         if ($this->validate()) {
-            $user = new UserOne();
+            $user = new User();
             $user->username = $this->username;
             $user->email = $this->email;
             $user->setPassword($this->password);
