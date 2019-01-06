@@ -43,7 +43,7 @@ class SiteController extends Controller
                     ],
                 ],
                 'denyCallback' => function ($rule, $action) {
-                    throw new \Exception('You are not allowed to access this page');
+                    return $this->redirect('/site/index');
                 }
             ],
             'verbs' => [
