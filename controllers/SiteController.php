@@ -29,8 +29,18 @@ class SiteController extends Controller
                     [
                         'actions' => ['logout'],
                         'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['demo-one'],
+                        'allow' => true,
                         'roles' => ['classoneRole'],
-                    ]
+                    ],
+                    [
+                        'actions' => ['demo-two'],
+                        'allow' => true,
+                        'roles' => ['classtwoRole'],
+                    ],
                 ],
             ],
             'verbs' => [
