@@ -30,16 +30,25 @@ class SiteController extends Controller
                         'actions' => ['logout'],
                         'allow' => true,
                         'roles' => ['@'],
+                        'denyCallback' => function ($rule, $action) {
+                            return $this->redirect('/site/index');
+                        }
                     ],
                     [
                         'actions' => ['demo-one'],
                         'allow' => true,
                         'roles' => ['classone'],
+                        'denyCallback' => function ($rule, $action) {
+                            return $this->redirect('/site/login-one');
+                        }
                     ],
                     [
                         'actions' => ['demo-two'],
                         'allow' => true,
                         'roles' => ['classtwo'],
+                        'denyCallback' => function ($rule, $action) {
+                            return $this->redirect('/site/login-two');
+                        }
                     ],
                 ],
             ],
