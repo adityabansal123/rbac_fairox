@@ -43,7 +43,7 @@ class SiteController extends Controller
                     ],
                 ],
                 'denyCallback' => function ($rule, $action) {
-                    return $this->redirect('/site/index');
+                    return $this->redirect('/web/site/loginone');
                 }
             ],
             'verbs' => [
